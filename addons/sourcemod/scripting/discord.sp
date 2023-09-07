@@ -117,7 +117,8 @@ void StoreMsg(char sWebhook[64], char sMessage[4096])
 	if(StrContains(sMessage, "{") != 0)
 		Format(sMessage, sizeof(sMessage), "{\"content\":\"%s\"}", sMessage);
 	
-	// Re-Format for Slack
+	// Re-Format for Slack and Discord?
+	// Why does Discord only work with /slack in its link?
 	if(StrContains(sUrl, "slack") != -1)
 		ReplaceString(sMessage, sizeof(sMessage), "\"content\":", "\"text\":");
 	

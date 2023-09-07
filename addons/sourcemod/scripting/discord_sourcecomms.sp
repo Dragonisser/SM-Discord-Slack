@@ -3,7 +3,7 @@
 
 #define PLUGIN_VERSION "1.2"
 
-#define MSG_BAN "{\"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"View on Sourcebans\",\"url\": \"{SOURCEBANS}\",\"fields\": [{\"name\": \"Player\",\"value\": \"{NICKNAME} [{STEAMID}](https://steamid.io/lookup/{STEAMID})},{\"name\": \"Admin\",\"value\": \"{ADMIN}\"},{\"name\": \"{COMMTYPE} Length\",\"value\": \"{BANLENGTH}\"},{\"name\": \"Reason\",\"value\": \"{REASON}\"]}]}"
+#define MSG_BAN "{\"content\":\"{MENTION}\",\"attachments\": [{\"color\": \"{COLOR}\",\"title\": \"View on Sourcebans\",\"title_link\": \"{SOURCEBANS}\",\"fields\": [{\"title\": \"Player\",\"value\": \"{NICKNAME} [{STEAMID}](https://steamid.io/lookup/{STEAMID})\",\"true\": false},{\"title\": \"Admin\",\"value\": \"{ADMIN}\",\"short\": true},{\"title\": \"{COMMTYPE} Length\",\"value\": \"{BANLENGTH}\",\"short\": true},{\"title\": \"Reason\",\"value\": \"{REASON}\",\"short\": true}]}]}"
 
 ConVar g_cColorGag = null;
 ConVar g_cColorMute = null;

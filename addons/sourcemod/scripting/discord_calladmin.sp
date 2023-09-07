@@ -4,8 +4,8 @@
 
 #define PLUGIN_VERSION "1.2"
 
-#define REPORT_MSG "{\"username\":\"{BOTNAME}\", \"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"{HOSTNAME} (steam://connect/{SERVER_IP}:{SERVER_PORT}){REFER_ID}\",\"fields\": [{\"name\": \"Reason\",\"value\": \"{REASON}\"},{\"name\": \"Reporter\",\"value\": \"{REPORTER_NAME} [{REPORTER_ID}](https://steamid.io/lookup/{REPORTER_ID})\"},{\"name\": \"Target\",\"value\": \"{TARGET_NAME} [{TARGET_ID}](https://steamid.io/lookup/{TARGET_ID})\"}]}]}"
-#define CLAIM_MSG "{\"username\":\"{BOTNAME}\", \"content\":\"{MSG}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"{HOSTNAME} (steam://connect/{SERVER_IP}:{SERVER_PORT})\",\"fields\": [{\"name\": \"Admin\",\"value\": \"{ADMIN}\"}]}]}"
+#define REPORT_MSG "{\"username\":\"{BOTNAME}\", \"content\":\"{MENTION}\",\"attachments\": [{\"color\": \"{COLOR}\",\"title\": \"{HOSTNAME} (steam://connect/{SERVER_IP}:{SERVER_PORT}){REFER_ID}\",\"fields\": [{\"title\": \"Reason\",\"value\": \"{REASON}\",\"short\": true},{\"title\": \"Reporter\",\"value\": \"{REPORTER_NAME} [{REPORTER_ID}](https://steamid.io/lookup/{REPORTER_ID})\",\"short\": true},{\"title\": \"Target\",\"value\": \"{TARGET_NAME} [{TARGET_ID}](https://steamid.io/lookup/{TARGET_ID})\",\"short\": true}]}]}"
+#define CLAIM_MSG "{\"username\":\"{BOTNAME}\", \"content\":\"{MSG}\",\"attachments\": [{\"color\": \"{COLOR}\",\"title\": \"{HOSTNAME} (steam://connect/{SERVER_IP}:{SERVER_PORT})\",\"fields\": [{\"title\": \"Admin\",\"value\": \"{ADMIN}\",\"short\": false}]}]}"
 
 char sSymbols[25][1] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
@@ -128,9 +128,6 @@ public Action Cmd_Claim(int client, int args)
 	
 	char sColor[8];
 	g_cColor2.GetString(sColor, sizeof(sColor));
-	ReplaceString(sColor, sizeof(sColor), "#", "");
-	int iColor = StringToInt(sColor, 16);
-	IntToString(iColor, sColor, sizeof(sColor));
 	
 	char sMSG[512] = CLAIM_MSG;
 	

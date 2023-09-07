@@ -3,7 +3,7 @@
 
 #define PLUGIN_VERSION "1.1"
 
-#define MSG_BAN "{\"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"View on Sourcebans\",\"url\": \"{SOURCEBANS}\",\"fields\": [{\"name\": \"Player\",\"value\": \"{NICKNAME} [{STEAMID}](https://steamid.io/lookup/{STEAMID})\"},{\"name\": \"Admin\",\"value\": \"{ADMIN}\"},{\"name\": \"Ban Length\",\"value\": \"{BANLENGTH}\"},{\"name\": \"Reason\",\"value\": \"{REASON}\"}]}]}"
+#define MSG_BAN "{\"content\":\"{MENTION}\",\"attachments\": [{\"color\": \"{COLOR}\",\"title\": \"View on Sourcebans\",\"title_link\": \"{SOURCEBANS}\",\"fields\": [{\"title\": \"Player\",\"value\": \"{NICKNAME} [{STEAMID}](https://steamid.io/lookup/{STEAMID})\",\"short\": true},{\"title\": \"Admin\",\"value\": \"{ADMIN}\",\"short\": true},{\"title\": \"Ban Length\",\"value\": \"{BANLENGTH}\",\"short\": true},{\"title\": \"Reason\",\"value\": \"{REASON}\",\"short\": true}]}]}"
 
 ConVar g_cColor = null;
 ConVar g_cSourcebans = null;
@@ -46,9 +46,6 @@ void PrePareMsg(int client, int target, int time, const char[] reason)
 {
 	char sColor[8];
 	g_cColor.GetString(sColor, sizeof(sColor));
-	ReplaceString(sColor, sizeof(sColor), "#", "");
-	int iColor = StringToInt(sColor, 16);
-	IntToString(iColor, sColor, sizeof(sColor));
 	
 	char sAuth[32];
 	GetClientAuthId(target, AuthId_Steam2, sAuth, sizeof(sAuth));
