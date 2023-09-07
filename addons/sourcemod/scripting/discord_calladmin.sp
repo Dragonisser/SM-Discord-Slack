@@ -4,8 +4,8 @@
 
 #define PLUGIN_VERSION "1.2"
 
-#define REPORT_MSG "{\"username\":\"{BOTNAME}\", \"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"{HOSTNAME} (steam://connect/{SERVER_IP}:{SERVER_PORT}){REFER_ID}\",\"fields\": [{\"name\": \"Reason\",\"value\": \"{REASON}\"},{\"name\": \"Reporter\",\"value\": \"{REPORTER_NAME} ({REPORTER_ID})\"},{\"name\": \"Target\",\"value\": \"{TARGET_NAME} ({TARGET_ID})\"}]}]}"
-#define CLAIM_MSG "{\"username\":\"{BOTNAME}\", \"content\":\"{MSG}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"{HOSTNAME} (steam://connect/{SERVER_IP}:{SERVER_PORT})\",\"fields\": [{\"name\": \"Admin\",\"value\": \"{ADMIN}\"}]}]}"
+#define REPORT_MSG "{\"username\":\"{BOTNAME}\", \"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"{HOSTNAME} [steam://connect/{SERVER_IP}:{SERVER_PORT}](steam://connect/{SERVER_IP}:{SERVER_PORT}){REFER_ID}\",\"fields\": [{\"name\": \"Reason\",\"value\": \"{REASON}\"},{\"name\": \"Reporter\",\"value\": \"{REPORTER_NAME} ({REPORTER_ID})\"},{\"name\": \"Target\",\"value\": \"{TARGET_NAME} [{TARGET_ID}](https://steamid.io/lookup/{TARGET_ID})\"}]}]}"
+#define CLAIM_MSG "{\"username\":\"{BOTNAME}\", \"content\":\"{MSG}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"{HOSTNAME} [steam://connect/{SERVER_IP}:{SERVER_PORT}](steam://connect/{SERVER_IP}:{SERVER_PORT})\",\"fields\": [{\"name\": \"Admin\",\"value\": \"{ADMIN}\"}]}]}"
 
 char sSymbols[25][1] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 

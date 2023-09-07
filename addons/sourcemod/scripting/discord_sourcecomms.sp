@@ -3,7 +3,7 @@
 
 #define PLUGIN_VERSION "1.2"
 
-#define MSG_BAN "{\"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"View on Sourcebans\",\"url\": \"{SOURCEBANS}\",\"fields\": [{\"name\": \"Player\",\"value\": \"{NICKNAME} ( {STEAMID} )},{\"name\": \"Admin\",\"value\": \"{ADMIN}\"},{\"name\": \"{COMMTYPE} Length\",\"value\": \"{BANLENGTH}\"},{\"name\": \"Reason\",\"value\": \"{REASON}\"]}]}"
+#define MSG_BAN "{\"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"View on Sourcebans\",\"url\": \"{SOURCEBANS}\",\"fields\": [{\"name\": \"Player\",\"value\": \"{NICKNAME} [{STEAMID}](https://steamid.io/lookup/{STEAMID})},{\"name\": \"Admin\",\"value\": \"{ADMIN}\"},{\"name\": \"{COMMTYPE} Length\",\"value\": \"{BANLENGTH}\"},{\"name\": \"Reason\",\"value\": \"{REASON}\"]}]}"
 
 ConVar g_cColorGag = null;
 ConVar g_cColorMute = null;

@@ -3,7 +3,7 @@
 
 #define PLUGIN_VERSION "1.1"
 
-#define MSG_BAN "{\"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"View on Sourcebans\",\"url\": \"{SOURCEBANS}\",\"fields\": [{\"name\": \"Player\",\"value\": \"{NICKNAME} ( {STEAMID} )\"},{\"name\": \"Admin\",\"value\": \"{ADMIN}\"},{\"name\": \"Ban Length\",\"value\": \"{BANLENGTH}\"},{\"name\": \"Reason\",\"value\": \"{REASON}\"}]}]}"
+#define MSG_BAN "{\"content\":\"{MENTION}\",\"embeds\": [{\"color\": {COLOR},\"title\": \"View on Sourcebans\",\"url\": \"{SOURCEBANS}\",\"fields\": [{\"name\": \"Player\",\"value\": \"{NICKNAME} [{STEAMID}](https://steamid.io/lookup/{STEAMID})\"},{\"name\": \"Admin\",\"value\": \"{ADMIN}\"},{\"name\": \"Ban Length\",\"value\": \"{BANLENGTH}\"},{\"name\": \"Reason\",\"value\": \"{REASON}\"}]}]}"
 
 ConVar g_cColor = null;
 ConVar g_cSourcebans = null;
