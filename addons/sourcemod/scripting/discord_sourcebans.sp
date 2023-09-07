@@ -36,6 +36,7 @@ public void SBPP_OnBanPlayer(int iAdmin, int iTarget, int iTime, const char[] sR
 	PrePareMsg(iAdmin, iTarget, iTime, sReason);
 }
 
+//Forward doesnt exist. Legacy Sourcebans?
 public void OnSBBanPlayer(int client, int target, int time, char[] reason)
 {
 	PrePareMsg(client, target, time, reason);

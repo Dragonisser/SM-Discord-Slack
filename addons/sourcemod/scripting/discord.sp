@@ -96,10 +96,11 @@ public int Native_SendMessage(Handle plugin, int numParams)
 	{
 		LogError("Webhook config not found or invalid! Webhook: %s Url: %s", sWebhook, sUrl);
 		LogError("Message: %s", sMessage);
-		return;
+		return 0;
 	}
 	
 	StoreMsg(sWebhook, sMessage);
+	return 1;
 }
 
 void StoreMsg(char sWebhook[64], char sMessage[4096])
@@ -128,6 +129,7 @@ void StoreMsg(char sWebhook[64], char sMessage[4096])
 	
 	g_aWebhook.PushString(sWebhook);
 	g_aMsgs.PushString(sMessage);
+
 }
 
 public Action Timer_SendNextMessage(Handle timer, any data)
@@ -180,6 +182,7 @@ public int OnRequestComplete(Handle hRequest, bool bFailed, bool bRequestSuccess
 	if(bFailed || !bRequestSuccessful)
 	{
 		LogError("[OnRequestComplete] Request failed");
+		return 0;
 	}
 	// Seems like the API is busy or too many message send recently
 	else if(eStatusCode == k_EHTTPStatusCode429TooManyRequests || eStatusCode == k_EHTTPStatusCode500InternalServerError)
@@ -218,6 +221,7 @@ public int OnRequestComplete(Handle hRequest, bool bFailed, bool bRequestSuccess
 	
 	delete hRequest;
 	g_bSending = false;
+	return 1;
 }
 
 void RestartMessageTimer(bool slowdown)

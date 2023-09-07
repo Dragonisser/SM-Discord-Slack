@@ -51,16 +51,17 @@ public void OnPluginStart()
 	AutoExecConfig(true, "discord_sourcecomms");
 }
 
+//Forward doesnt exist
 public int SourceComms_OnMutePlayer(int client, int target, int time, char[] reason)
 {
 	PrePareMsg(client, target, time, 1, reason);
 }
-
+//Forward doesnt exist
 public int SourceComms_OnGagPlayer(int client, int target, int time, char[] reason)
 {
 	PrePareMsg(client, target, time, 2, reason);
 }
-
+//Forward doesnt exist
 public int SourceComms_OnSilencePlayer(int client, int target, int time, char[] reason)
 {
 	PrePareMsg(client, target, time, 3, reason);
