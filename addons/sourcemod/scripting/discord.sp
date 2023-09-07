@@ -14,10 +14,10 @@ bool g_bSlowdown;
 public Plugin myinfo = 
 {
 	name = "Discord API",
-	author = ".#Zipcore, Credits: Shavit, bara, ImACow and Phire",
+	author = ".#Zipcore, Dragonisser, Credits: Shavit, bara, ImACow and Phire",
 	description = "This plugin lets you send messages to discord and slack",
 	version = PLUGIN_VERSION,
-	url = "www.zipcore.net"
+	url = "https://forums.alliedmods.net/showthread.php?t=292663"
 };
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
