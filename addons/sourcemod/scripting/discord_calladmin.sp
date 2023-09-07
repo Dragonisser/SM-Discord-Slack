@@ -155,10 +155,6 @@ public void CallAdmin_OnReportPost(int client, int target, const char[] reason)
 	if(!CheckCommandAccess(client, "sm_ban", ADMFLAG_BAN, true))
 		g_cColor.GetString(sColor, sizeof(sColor));
 	else g_cColor3.GetString(sColor, sizeof(sColor));
-
-	ReplaceString(sColor, sizeof(sColor), "#", "");
-	int iColor = StringToInt(sColor, 16);
-	IntToString(iColor, sColor, sizeof(sColor));
 	
 	char sReason[(REASON_MAX_LENGTH + 1) * 2];
 	strcopy(sReason, sizeof(sReason), reason);
@@ -195,7 +191,6 @@ public void CallAdmin_OnReportPost(int client, int target, const char[] reason)
 	if (!StrEqual(sRemove, ""))
 		ReplaceString(g_sServerName, sizeof(g_sServerName), sRemove, "");
 
-	
 	Discord_EscapeString(g_sServerName, sizeof(g_sServerName));
 	
 	char sMention[512];
