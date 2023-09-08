@@ -83,14 +83,29 @@ public Action Command_Test(int client, int args)
 	return Plugin_Handled;
 }
 
-public int Native_SendMessage(Handle plugin, int numParams)
+public int Native_SendMessage(Handle hPlugin, int numParams)
 {
+	int iErrors = 0;
+
+	char sPluginName[64];
+	GetPluginFilename(hPlugin, sPluginName, sizeof(sPluginName));
+	
 	char sWebhook[64]
 	GetNativeString(1, sWebhook, sizeof(sWebhook));
 	
 	char sMessage[4096];
 	GetNativeString(2, sMessage, sizeof(sMessage));
-	
+
+	if (strlen(sWebhook) == 0) {
+		LogError("Plugin '%s' tries to call a Discord/Slack webhook but none was specified", sPluginName);
+		iErrors++;
+	}
+	if (strlen(sMessage) == 0) {
+		LogError("Plugin '%s' tries to call a Discord/Slack webhook but no message was specified", sPluginName);
+		iErrors++;
+	}
+	if (iErrors > 0) return 0;
+
 	char sUrl[512];
 	if(!GetWebHook(sWebhook, sUrl, sizeof(sUrl)))
 	{
@@ -117,7 +132,7 @@ void StoreMsg(char sWebhook[64], char sMessage[4096])
 	if(StrContains(sMessage, "{") != 0)
 		Format(sMessage, sizeof(sMessage), "{\"content\":\"%s\"}", sMessage);
 	
-	// Re-Format for Slack and Discord?
+	// Re-Format for Slack and ?Discord?
 	// Why does Discord only work with /slack in its link?
 	if(StrContains(sUrl, "slack") != -1)
 		ReplaceString(sMessage, sizeof(sMessage), "\"content\":", "\"text\":");
