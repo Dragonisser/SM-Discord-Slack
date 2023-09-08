@@ -1,7 +1,7 @@
 #include <sourcemod>
 #include <SteamWorks>
 
-#define PLUGIN_VERSION "1.0"
+#define PLUGIN_VERSION "1.1"
 
 ArrayList g_aMsgs = null;
 ArrayList g_aWebhook = null;
