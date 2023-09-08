@@ -10,8 +10,7 @@ ConVar g_cSourcebans = null;
 ConVar g_cWebhook = null;
 ConVar g_cMention = null;
 
-public Plugin myinfo = 
-{
+public Plugin myinfo = {
 	name = "Discord: SourceBans",
 	author = ".#Zipcore, Dragonisser",
 	description = "Sourceban submodule for Discord Plugin",
@@ -19,8 +18,7 @@ public Plugin myinfo =
 	url = "https://forums.alliedmods.net/showthread.php?t=292663"
 }
 
-public void OnPluginStart()
-{
+public void OnPluginStart() {
 	CreateConVar("discord_sourcebans_version", PLUGIN_VERSION, "Discord SourceBans version", FCVAR_DONTRECORD|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 	
 	g_cColor = CreateConVar("discord_sourcebans_color", "#ff2222", "Discord/Slack attachment color.");
@@ -31,19 +29,16 @@ public void OnPluginStart()
 	AutoExecConfig(true, "discord_sourcebans");
 }
 
-public void SBPP_OnBanPlayer(int iAdmin, int iTarget, int iTime, const char[] sReason)
-{
+public void SBPP_OnBanPlayer(int iAdmin, int iTarget, int iTime, const char[] sReason) {
 	PrePareMsg(iAdmin, iTarget, iTime, sReason);
 }
 
 //Deprecated
-public void OnSBBanPlayer(int client, int target, int time, char[] reason)
-{
+public void OnSBBanPlayer(int client, int target, int time, char[] reason) {
 	PrePareMsg(client, target, time, reason);
 }
 
-void PrePareMsg(int client, int target, int time, const char[] reason)
-{
+void PrePareMsg(int client, int target, int time, const char[] reason) {
 	char sColor[8];
 	g_cColor.GetString(sColor, sizeof(sColor));
 	
@@ -54,38 +49,33 @@ void PrePareMsg(int client, int target, int time, const char[] reason)
 	GetClientName(target, sName, sizeof(sName));
 	
 	char sAdminName[32];
-	if(client && IsClientInGame(client))
+	if (client && IsClientInGame(client)) {
 		GetClientName(client, sAdminName, sizeof(sAdminName));
-	else sAdminName = "CONSOLE";
-	
+	} else {
+		sAdminName = "CONSOLE";
+	} 
+		
 	char sLength[32];
-	if(time == 0)
-	{
+	if (time == 0) {
 		sLength = "Permanent";
-	}
-	else if (time >= 525600)
-	{
+	} else if (time >= 525600) {
 		int years = RoundToFloor(time / 525600.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d year%s)", time, years, years == 1 ? "" : "s");
-    }
-	else if (time >= 10080)
-	{
+    } else if (time >= 10080) {
 		int weeks = RoundToFloor(time / 10080.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d week%s)", time, weeks, weeks == 1 ? "" : "s");
-    }
-	else if (time >= 1440)
-	{
+	} else if (time >= 1440) {
 		int days = RoundToFloor(time / 1440.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d day%s)", time, days, days == 1 ? "" : "s");
-    }
-	else if (time >= 60)
-	{
+    } else if (time >= 60) {
 		int hours = RoundToFloor(time / 60.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d hour%s)", time, hours, hours == 1 ? "" : "s");
-    }
-	else if (time > 0) Format(sLength, sizeof(sLength), "%d min%s", time, time == 1 ? "" : "s");
-	else return;
-    
+    } else if (time > 0) {
+		Format(sLength, sizeof(sLength), "%d min%s", time, time == 1 ? "" : "s");
+	} else {
+		return;
+	}
+	
 	Discord_EscapeString(sName, strlen(sName));
 	Discord_EscapeString(sAdminName, strlen(sAdminName));
 	
@@ -113,8 +103,7 @@ void PrePareMsg(int client, int target, int time, const char[] reason)
 	SendMessage(sMSG);
 }
 
-SendMessage(char[] sMessage)
-{
+SendMessage(char[] sMessage) {
 	char sWebhook[32];
 	g_cWebhook.GetString(sWebhook, sizeof(sWebhook));
 	Discord_SendMessage(sWebhook, sMessage);

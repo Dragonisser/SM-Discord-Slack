@@ -71,16 +71,16 @@ void UpdateIPPort()
 	
 	GetConVarString(g_cIP, g_sHostIP, sizeof(g_sHostIP));
 	
-	if(!StrEqual(g_sHostIP, "0.0.0.0"))
+	if (!StrEqual(g_sHostIP, "0.0.0.0"))
 		return;
 	
-	if(FindConVar("net_public_adr") != null)
+	if (FindConVar("net_public_adr") != null)
 		GetConVarString(FindConVar("net_public_adr"), g_sHostIP, sizeof(g_sHostIP));
 	
-	if(strlen(g_sHostIP) == 0 && FindConVar("ip") != null)
+	if (strlen(g_sHostIP) == 0 && FindConVar("ip") != null)
 		GetConVarString(FindConVar("ip"), g_sHostIP, sizeof(g_sHostIP));
 	
-	if(strlen(g_sHostIP) == 0 && FindConVar("hostip") != null)
+	if (strlen(g_sHostIP) == 0 && FindConVar("hostip") != null)
 	{
 		int ip = GetConVarInt(FindConVar("hostip"));
 		FormatEx(g_sHostIP, sizeof(g_sHostIP), "%d.%d.%d.%d", (ip >> 24) & 0x000000FF, (ip >> 16) & 0x000000FF, (ip >> 8) & 0x000000FF, ip & 0x000000FF);
@@ -152,7 +152,7 @@ public Action Cmd_Claim(int client, int args)
 public void CallAdmin_OnReportPost(int client, int target, const char[] reason)
 {
 	char sColor[8];
-	if(!CheckCommandAccess(client, "sm_ban", ADMFLAG_BAN, true))
+	if (!CheckCommandAccess(client, "sm_ban", ADMFLAG_BAN, true))
 		g_cColor.GetString(sColor, sizeof(sColor));
 	else g_cColor3.GetString(sColor, sizeof(sColor));
 	

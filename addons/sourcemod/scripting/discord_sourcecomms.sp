@@ -20,8 +20,7 @@ ConVar g_cWebhookUnMuteTmp = null;
 ConVar g_cWebhookUnSilenceTmp = null;
 ConVar g_cMention = null;
 
-public Plugin myinfo = 
-{
+public Plugin myinfo = {
 	name = "Discord: SourceComms",
 	author = ".#Zipcore, Dragonisser",
 	description = "SourceComms submodule for Discord Plugin",
@@ -29,8 +28,7 @@ public Plugin myinfo =
 	url = "https://forums.alliedmods.net/showthread.php?t=292663"
 }
 
-public void OnPluginStart()
-{
+public void OnPluginStart() {
 	CreateConVar("discord_sourcecomms_version", PLUGIN_VERSION, "Discord SourceComms version", FCVAR_DONTRECORD|FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 	
 	g_cColorGag = CreateConVar("discord_sourcecomms_color_gag", "#ffff22", "Discord/Slack attachment gag color.");
@@ -52,28 +50,23 @@ public void OnPluginStart()
 }
 
 //Forward doesnt exist
-public int SourceComms_OnMutePlayer(int client, int target, int time, char[] reason)
-{
+public int SourceComms_OnMutePlayer(int client, int target, int time, char[] reason) {
 	PrePareMsg(client, target, time, 1, reason);
 }
 //Forward doesnt exist
-public int SourceComms_OnGagPlayer(int client, int target, int time, char[] reason)
-{
+public int SourceComms_OnGagPlayer(int client, int target, int time, char[] reason) n{
 	PrePareMsg(client, target, time, 2, reason);
 }
 //Forward doesnt exist
-public int SourceComms_OnSilencePlayer(int client, int target, int time, char[] reason)
-{
+public int SourceComms_OnSilencePlayer(int client, int target, int time, char[] reason) {
 	PrePareMsg(client, target, time, 3, reason);
 }
 
-public int SourceComms_OnBlockAdded(int client, int target, int time, int commstype, char[] reason)
-{
+public int SourceComms_OnBlockAdded(int client, int target, int time, int commstype, char[] reason) {
 	PrePareMsg(client, target, time, commstype, reason);
 }
 
-public int PrePareMsg(int client, int target, int time, int commstype, char[] reason)
-{
+public int PrePareMsg(int client, int target, int time, int commstype, char[] reason) {
 	char sAuth[32];
 	GetClientAuthId(target, AuthId_Steam2, sAuth, sizeof(sAuth));
 	
@@ -81,40 +74,32 @@ public int PrePareMsg(int client, int target, int time, int commstype, char[] re
 	GetClientName(target, sName, sizeof(sName));
 	
 	char sAdminName[32];
-	if(client && IsClientInGame(client))
+	if (client && IsClientInGame(client)) {
 		GetClientName(client, sAdminName, sizeof(sAdminName));
-	else sAdminName = "CONSOLE";
+	} else {
+		sAdminName = "CONSOLE";
+	} 
 	
 	char sLength[32];
-	if(time < 0)
-	{
+	if (time < 0) {
 		sLength = "Session";
-	}
-	else if(time == 0)
-	{
+	} else if (time == 0) {
 		sLength = "Permanent";
-	}
-	else if (time >= 525600)
-	{
+	} else if (time >= 525600) {
 		int years = RoundToFloor(time / 525600.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d year%s)", time, years, years == 1 ? "" : "s");
-	}
-	else if (time >= 10080)
-	{
+	} else if (time >= 10080) {
 		int weeks = RoundToFloor(time / 10080.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d week%s)", time, weeks, weeks == 1 ? "" : "s");
-	}
-	else if (time >= 1440)
-	{
+	} else if (time >= 1440) {
 		int days = RoundToFloor(time / 1440.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d day%s)", time, days, days == 1 ? "" : "s");
-	}
-	else if (time >= 60)
-	{
+	} else if (time >= 60) {
 		int hours = RoundToFloor(time / 60.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d hour%s)", time, hours, hours == 1 ? "" : "s");
+	} else {
+		Format(sLength, sizeof(sLength), "%d min%s", time, time == 1 ? "" : "s");
 	}
-	else Format(sLength, sizeof(sLength), "%d min%s", time, time == 1 ? "" : "s");
     
 	Discord_EscapeString(sName, strlen(sName));
 	Discord_EscapeString(sAdminName, strlen(sAdminName));
@@ -127,56 +112,44 @@ public int PrePareMsg(int client, int target, int time, int commstype, char[] re
 	char sColor[512];
 	char sType[64];
 	
-	switch(commstype)
-	{
-		case 1: 
-		{
+	switch(commstype) {
+		case 1: {
 			g_cColorMute.GetString(sColor, sizeof(sColor));
 			sType = "Mute";
 		}
-		case 2: 
-		{
+		case 2: {
 			g_cColorGag.GetString(sColor, sizeof(sColor));
 			sType = "Gag";
 		}
-		case 3: 
-		{
+		case 3: {
 			g_cColorSilence.GetString(sColor, sizeof(sColor));
 			sType = "Silence";
 		}
-		case 4: 
-		{
+		case 4: {
 			g_cColorSilence.GetString(sColor, sizeof(sColor));
 			sType = "UnMute";
 		}
-		case 5: 
-		{
+		case 5: {
 			g_cColorSilence.GetString(sColor, sizeof(sColor));
 			sType = "UnGag";
 		}
-		case 6: 
-		{
+		case 6: {
 			g_cColorSilence.GetString(sColor, sizeof(sColor));
 			sType = "UnSilence";
 		}
-		case 14: 
-		{
+		case 14: {
 			g_cColorSilence.GetString(sColor, sizeof(sColor));
 			sType = "UnMute (tmp)";
 		}
-		case 15: 
-		{
+		case 15: {
 			g_cColorSilence.GetString(sColor, sizeof(sColor));
 			sType = "UnGag (tmp)";
 		}
-		case 16: 
-		{
+		case 16: {
 			g_cColorSilence.GetString(sColor, sizeof(sColor));
 			sType = "UnSilence (tmp)";
 		}
-		
-		default:
-		{
+		default:{
 			LogError("Commstype %i not found!", commstype);
 			return;
 		}
@@ -206,45 +179,34 @@ public int PrePareMsg(int client, int target, int time, int commstype, char[] re
 	SendMessage(sMSG, commstype);
 }
 
-SendMessage(char[] sMessage, int commstype)
-{
+SendMessage(char[] sMessage, int commstype) {
 	char sWebhook[32];
-	switch(commstype)
-	{
-		case 1: 
-		{
+	switch(commstype) {
+		case 1: {
 			g_cWebhookMute.GetString(sWebhook, sizeof(sWebhook));
 		}
-		case 2: 
-		{
+		case 2: {
 			g_cWebhookGag.GetString(sWebhook, sizeof(sWebhook));
 		}
-		case 3: 
-		{
+		case 3: {
 			g_cWebhookSilence.GetString(sWebhook, sizeof(sWebhook));
 		}
-		case 4: 
-		{
+		case 4: {
 			g_cWebhookUnMute.GetString(sWebhook, sizeof(sWebhook));
 		}
-		case 5: 
-		{
+		case 5: {
 			g_cWebhookUnGag.GetString(sWebhook, sizeof(sWebhook));
 		}
-		case 6: 
-		{
+		case 6: {
 			g_cWebhookUnSilence.GetString(sWebhook, sizeof(sWebhook));
 		}
-		case 14: 
-		{
+		case 14: {
 			g_cWebhookUnMuteTmp.GetString(sWebhook, sizeof(sWebhook));
 		}
-		case 15: 
-		{
+		case 15: {
 			g_cWebhookUnGagTmp.GetString(sWebhook, sizeof(sWebhook));
 		}
-		case 16: 
-		{
+		case 16: {
 			g_cWebhookUnSilenceTmp.GetString(sWebhook, sizeof(sWebhook));
 		}
 	}
