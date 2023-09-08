@@ -61,16 +61,16 @@ void PrePareMsg(int client, int target, int time, const char[] reason) {
 	} else if (time >= 525600) {
 		int years = RoundToFloor(time / 525600.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d year%s)", time, years, years == 1 ? "" : "s");
-    } else if (time >= 10080) {
+	} else if (time >= 10080) {
 		int weeks = RoundToFloor(time / 10080.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d week%s)", time, weeks, weeks == 1 ? "" : "s");
 	} else if (time >= 1440) {
 		int days = RoundToFloor(time / 1440.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d day%s)", time, days, days == 1 ? "" : "s");
-    } else if (time >= 60) {
+	} else if (time >= 60) {
 		int hours = RoundToFloor(time / 60.0);
 		Format(sLength, sizeof(sLength), "%d mins (%d hour%s)", time, hours, hours == 1 ? "" : "s");
-    } else if (time > 0) {
+	} else if (time > 0) {
 		Format(sLength, sizeof(sLength), "%d min%s", time, time == 1 ? "" : "s");
 	} else {
 		return;
