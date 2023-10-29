@@ -1,9 +1,9 @@
 #include <sourcemod>
 #include <discord>
 
-#define PLUGIN_VERSION "1.2"
+#define PLUGIN_VERSION "1.2.1"
 
-#define MSG_BAN "{\"content\":\"{MENTION}\",\"attachments\": [{\"color\": \"{COLOR}\",\"title\": \"View on Sourcebans\",\"title_link\": \"{SOURCEBANS}\",\"fields\": [{\"title\": \"Player\",\"value\": \"{NICKNAME} [{STEAMID}](https://steamid.io/lookup/{STEAMID})\",\"true\": false},{\"title\": \"Admin\",\"value\": \"{ADMIN}\",\"short\": true},{\"title\": \"{COMMTYPE} Length\",\"value\": \"{BANLENGTH}\",\"short\": true},{\"title\": \"Reason\",\"value\": \"{REASON}\",\"short\": true}]}]}"
+#define MSG_BAN "{\"content\":\"{MENTION}\",\"attachments\": [{\"color\": \"{COLOR}\",\"title\": \"View on Sourcebans\",\"title_link\": \"{SOURCEBANS}\",\"fields\": [{\"title\": \"Player\",\"value\": \"{NICKNAME} [{STEAMID}](https://steamid.io/lookup/{STEAMID})\",\"short\": false},{\"title\": \"Admin\",\"value\": \"{ADMIN}\",\"short\": true},{\"title\": \"{COMMTYPE} Length\",\"value\": \"{BANLENGTH}\",\"short\": true},{\"title\": \"Reason\",\"value\": \"{REASON}\",\"short\": true}]}]}"
 
 ConVar g_cColorGag = null;
 ConVar g_cColorMute = null;
@@ -154,10 +154,6 @@ public int PrePareMsg(int client, int target, int time, int commstype, char[] re
 			return;
 		}
 	}
-
-	ReplaceString(sColor, sizeof(sColor), "#", "");
-	int iColor = StringToInt(sColor, 16);
-	IntToString(iColor, sColor, sizeof(sColor));
 	
 	char sReason[64];
 	strcopy(sReason, sizeof(sReason), reason);
